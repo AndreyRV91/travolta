@@ -1,10 +1,12 @@
 <template>
-  <div class="about">
-    <SearchForm />
+  <div>
+    <SearchForm class="search-form" />
     <h1>Travel With <span class="text-pink">TRAVOLTA</span></h1>
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex nemo iusto distinctio debitis sint
     accusantium culpa modi praesentium odit hic alias libero nulla ut eaque cupiditate, provident
-    officiis, tenetur ducimus.
+    officiis, tenetur ducimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo minima
+    dolores nobis ducimus odio doloribus magni tenetur soluta! Repellat ad error quo architecto
+    alias quis laudantium, eaque dolorum neque enim.
   </div>
 </template>
 
@@ -20,5 +22,9 @@ import SearchForm from '../components/SearchForm.vue'
 
 h1 {
   font-weight: 700;
+}
+
+.search-form {
+  margin-bottom: 20px;
 }
 </style>

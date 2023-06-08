@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <el-container>
+  <el-container class="container">
     <el-header>
       <nav class="menu-container">
         <RouterLink to="/" class="logo-container">
@@ -11,8 +11,16 @@ import { RouterLink, RouterView } from 'vue-router'
           <span class="logo-text">TRAVOLTA</span>
         </RouterLink>
 
-        <el-menu mode="horizontal" :ellipsis="false">
-          <el-menu-item index="1"><RouterLink to="/about">About us</RouterLink></el-menu-item>
+        <el-menu
+          text-color="#fff"
+          active-text-color="white"
+          background-color="#545c64"
+          mode="horizontal"
+          :ellipsis="false"
+        >
+          <el-menu-item type="secondary" index="1"
+            ><RouterLink to="/about">About us</RouterLink></el-menu-item
+          >
           <el-menu-item index="2"><RouterLink to="/bookings">My bookings</RouterLink></el-menu-item>
           <el-menu-item index="3"><RouterLink to="/signin">Sign-in</RouterLink></el-menu-item>
         </el-menu>
@@ -23,6 +31,18 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
+.container {
+  background-color: var(--gray);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+main {
+  max-width: 1200px;
+  padding: 20px;
+  margin: auto;
+}
+
 header {
   display: flex;
   justify-content: center;

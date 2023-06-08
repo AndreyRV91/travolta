@@ -1,5 +1,8 @@
 :root {
   --raspberry_pink_light: #ff00ff;
+  --gray: #F2F3F5;
+  --gray_dark: #434a50;
+  --gray_light: #686c6e;
 }
 
 *,
@@ -11,6 +14,7 @@
 }
 
 body {
+  margin: 0;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
