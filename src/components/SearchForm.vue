@@ -6,9 +6,10 @@
     :rules="rules"
     label-width="120px"
     status-icon
+    @keyup="handleSubmitWithKey"
   >
     <el-row :gutter="20" justify-content="space-evenly" align-items="center">
-      <el-col :span="4">
+      <el-col :span="6">
         <el-form-item label="Destination" prop="destination" required>
           <el-autocomplete
             v-model="searchForm.destination"
@@ -18,7 +19,7 @@
         </el-form-item>
       </el-col>
 
-      <el-col :span="6">
+      <el-col :span="5">
         <el-form-item label="Check-in" prop="checkin" required>
           <el-date-picker
             v-model="searchForm.checkin"
@@ -29,7 +30,7 @@
           /> </el-form-item
       ></el-col>
 
-      <el-col :span="6">
+      <el-col :span="5">
         <el-form-item label="Check-out" prop="checkout" required>
           <el-date-picker
             v-model="searchForm.checkout"
@@ -61,12 +62,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { destinationsMock } from '@/components/__mocks__'
-import { useRouter } from 'vue-router'
-import { useHotelStore } from '@/store/hotels'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { destinationsMock } from '@/components/__mocks__'
+import { useHotelStore } from '@/store/hotels'
 
 const router = useRouter()
 const hotelStore = useHotelStore()
@@ -160,6 +161,12 @@ const sendFormData = async () => {
   router.push({
     name: 'hotels'
   })
+}
+
+const handleSubmitWithKey = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    submitForm(searchFormRef.value)
+  }
 }
 
 watch(searchForm, () => {
