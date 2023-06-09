@@ -10,8 +10,15 @@
       <el-col :span="12">
         <div>
           <p class="hotel-item__descr_bold_large">{{ hotel.name }}</p>
-          <p class="hotel-item__descr">{{ hotel.hotel_rating }}</p>
-          <p class="hotel-item__descr">{{ hotel.address }}</p>
+          <vue3-star-ratings
+            v-model="stars"
+            disable-click
+            star-color="#ff00ff"
+            inactive-color="#545c64"
+            :star-size="18"
+            :show-control="false"
+          />
+          <p>{{ hotel.address }}</p>
         </div>
       </el-col>
       <el-col :span="2">
@@ -25,12 +32,14 @@
 
 <script setup lang="ts">
 import type { Hotel } from '@/types'
+import { ref } from 'vue'
 
 interface HotelItemProps {
   hotel: Hotel
 }
 
-defineProps<HotelItemProps>()
+const props = defineProps<HotelItemProps>()
+const stars = ref(props.hotel.hotel_rating)
 
 const showDetails = () => {}
 </script>
@@ -40,22 +49,13 @@ const showDetails = () => {}
   width: 100%;
 }
 
-.hotel-item__descr {
-  margin-bottom: 5px;
-}
-
-.hotel-item__descr_bold {
-  font-weight: 700;
-}
-
 .hotel-item__descr_bold_large {
+  font-weight: 700;
   font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 7px;
 }
 .hotel-item__wrapper {
   align-items: center;
 }
-
-/* .hotel-item__btn {
-  align-self: flex-start;
-} */
 </style>
