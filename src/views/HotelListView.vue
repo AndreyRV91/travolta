@@ -1,11 +1,13 @@
 <template>
-  <div v-if="hotels.length">
-    <el-row :gutter="20">
-      <el-col :span="6"><FilterBox @set-filter="setFilter" /></el-col>
-      <el-col :span="18"><HotelList :hotels="filteredHotels" /></el-col>
-    </el-row>
-  </div>
-  <div v-else>No hotels matching your search criteria</div>
+  <el-row :gutter="20">
+    <el-col :span="6"
+      ><aside><FilterBox @set-filter="setFilter" /></aside
+    ></el-col>
+    <el-col :span="18">
+      <HotelList v-if="hotels.length" :hotels="filteredHotels" />
+      <div v-else>No hotels matching your search criteria</div>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup lang="ts">

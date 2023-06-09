@@ -10,10 +10,6 @@ export const destinationsMock: Destination[] = [
     name: 'Boston'
   },
   {
-    id: 5034,
-    name: 'Boston'
-  },
-  {
     id: 34501,
     name: 'Celebration'
   },

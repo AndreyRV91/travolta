@@ -25,6 +25,7 @@
             type="date"
             value-format="YYYY-MM-DD"
             class="date-picker"
+            :disabled-date="disabledCheckIn"
           /> </el-form-item
       ></el-col>
 
@@ -35,6 +36,7 @@
             type="date"
             value-format="YYYY-MM-DD"
             class="date-picker"
+            :disabled-date="disabledCheckOut"
           /> </el-form-item
       ></el-col>
 
@@ -55,18 +57,21 @@
       </el-col>
     </el-row>
   </el-form>
+  <div class="warning">{{ noHotelsFound ? 'No hotels matching your search criteria' : '' }}</div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { destinationsMock } from '@/components/__mocks__'
 import { useRouter } from 'vue-router'
 import { useHotelStore } from '@/store/hotels'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const hotelStore = useHotelStore()
 const { setHotels } = hotelStore
+const { hotels } = storeToRefs(hotelStore)
 
 interface DestinationItem {
   id: number
@@ -81,6 +86,16 @@ const searchForm = reactive({
   adults: 1,
   children: 0
 })
+
+const noHotelsFound = ref(false)
+
+const disabledCheckIn = (time: any) => {
+  return time.getTime() < Date.now()
+}
+
+const disabledCheckOut = (time: any) => {
+  return time.getTime() < new Date(searchForm.checkin).getTime()
+}
 
 const rules = reactive<FormRules>({
   destination: [{ required: true, message: 'Please input destination', trigger: 'blur' }],
@@ -136,10 +151,29 @@ const sendFormData = async () => {
 
   await setHotels(payload)
 
+  if (!hotels.value.length) {
+    noHotelsFound.value = true
+    return
+  }
+
+  noHotelsFound.value = false
   router.push({
     name: 'hotels'
   })
 }
+
+watch(searchForm, () => {
+  noHotelsFound.value = false
+})
+
+watch(
+  () => searchForm.checkin,
+  () => {
+    if (new Date(searchForm.checkout).getTime() < new Date(searchForm.checkin).getTime()) {
+      searchForm.checkout = ''
+    }
+  }
+)
 
 onMounted(() => {
   destinations.value = destinationsMock.map((destination) => ({
@@ -160,5 +194,10 @@ onMounted(() => {
 
 :deep(.date-picker) {
   width: 100% !important;
+}
+
+.warning {
+  height: 10px;
+  margin-bottom: 20px;
 }
 </style>

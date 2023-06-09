@@ -3,6 +3,7 @@
     <el-row :gutter="20" class="hotel-item__wrapper">
       <el-col :span="7">
         <el-image
+          lazy
           src="https://cf.bstatic.com/xdata/images/hotel/square200/223031991.webp?k=83dd51293f7d9222f1c9cb65e2600ad6fa059ef59c0b9c7c7cc81e585e10f954&o="
         ></el-image
       ></el-col>
