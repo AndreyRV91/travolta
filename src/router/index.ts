@@ -13,6 +13,7 @@ const router = createRouter({
     {
       path: '/hotels',
       name: 'hotels',
+      props: (route) => ({ query: route.query }),
       component: HotelListView
     }
   ]

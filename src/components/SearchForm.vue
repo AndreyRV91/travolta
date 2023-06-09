@@ -6,7 +6,6 @@
     :rules="rules"
     label-width="120px"
     status-icon
-    class="search-form"
   >
     <el-row :gutter="20" justify-content="space-evenly" align-items="center">
       <el-col :span="4">
@@ -15,7 +14,6 @@
             v-model="searchForm.destination"
             :fetch-suggestions="querySearch"
             clearable
-            @select="selectDestination"
           />
         </el-form-item>
       </el-col>
@@ -26,7 +24,7 @@
             v-model="searchForm.checkin"
             type="date"
             value-format="YYYY-MM-DD"
-            style="width: 100%"
+            class="date-picker"
           /> </el-form-item
       ></el-col>
 
@@ -36,7 +34,7 @@
             v-model="searchForm.checkout"
             type="date"
             value-format="YYYY-MM-DD"
-            style="width: 100%"
+            class="date-picker"
           /> </el-form-item
       ></el-col>
 
@@ -52,7 +50,7 @@
 
       <el-col :span="2" class="submit-btn">
         <el-form-item>
-          <el-button @click="submitForm(searchFormRef)"> Search </el-button>
+          <el-button color="#ff00ff" @click="submitForm(searchFormRef)"> Search </el-button>
         </el-form-item>
       </el-col>
     </el-row>
@@ -64,23 +62,25 @@ import { onMounted, reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { destinationsMock } from '@/components/__mocks__'
 import { useRouter } from 'vue-router'
+import { useHotelStore } from '@/store/hotels'
 
 const router = useRouter()
-
-const searchFormRef = ref<FormInstance>()
-const searchForm = reactive({
-  destination: '',
-  destinationId: 0,
-  checkin: '',
-  checkout: '',
-  adults: 1,
-  children: 0
-})
+const hotelStore = useHotelStore()
+const { setHotels } = hotelStore
 
 interface DestinationItem {
   id: number
   value: string
 }
+
+const searchFormRef = ref<FormInstance>()
+const searchForm = reactive({
+  destination: '',
+  checkin: '',
+  checkout: '',
+  adults: 1,
+  children: 0
+})
 
 const rules = reactive<FormRules>({
   destination: [{ required: true, message: 'Please input destination', trigger: 'blur' }],
@@ -126,22 +126,19 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 }
 
 const sendFormData = async () => {
-  const query = {
-    dest_id: searchForm.destinationId,
+  const payload = {
+    destination: searchForm.destination,
     checkin: searchForm.checkin,
     checkout: searchForm.checkout,
     adults: searchForm.adults,
     children: searchForm.children
   }
 
-  router.push({
-    name: 'hotels',
-    query
-  })
-}
+  await setHotels(payload)
 
-const selectDestination = (item: DestinationItem) => {
-  searchForm.destinationId = item.id
+  router.push({
+    name: 'hotels'
+  })
 }
 
 onMounted(() => {
@@ -157,10 +154,11 @@ onMounted(() => {
   align-self: end;
 }
 
-.search-form {
-  width: auto;
-}
 .el-input-number {
   width: 100%;
+}
+
+:deep(.date-picker) {
+  width: 100% !important;
 }
 </style>

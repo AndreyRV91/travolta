@@ -26,7 +26,10 @@ import { RouterLink, RouterView } from 'vue-router'
         </el-menu>
       </nav>
     </el-header>
-    <el-main><RouterView /></el-main>
+    <el-main
+      ><el-row justify="center"
+        ><el-col :span="18"><RouterView /></el-col></el-row
+    ></el-main>
   </el-container>
 </template>
 
@@ -38,9 +41,7 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 main {
-  max-width: 1200px;
   padding: 20px;
-  margin: auto;
 }
 
 header {

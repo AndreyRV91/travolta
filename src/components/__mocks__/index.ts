@@ -1,4 +1,4 @@
-import type { Destination } from '@/types/index'
+import type { Destination, Hotel, HotelsRequestBody } from '@/types'
 
 export const destinationsMock: Destination[] = [
   {
@@ -87,7 +87,7 @@ export const destinationsMock: Destination[] = [
   }
 ]
 
-const hotelsMock = [
+const hotelsMock: Hotel[] = [
   {
     id: 5018105,
     name: 'Woogo Central Park - Tempo Apartments',
@@ -860,10 +860,10 @@ const hotelsMock = [
   }
 ]
 
-export const fetchHotels = () => {
-  return new Promise((resolve) => {
+export const fetchHotels = (payload: HotelsRequestBody) => {
+  return new Promise<Hotel[]>((resolve) => {
     setTimeout(() => {
-      resolve(hotelsMock)
+      resolve(hotelsMock.filter((hotel) => hotel.city === payload.destination))
     }, 100)
   })
 }
