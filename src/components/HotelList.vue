@@ -10,7 +10,7 @@
 import HotelItem from '@/components/HotelItem.vue'
 import type { Hotel } from '@/types'
 import { useEventListener } from '@vueuse/core'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 interface HotelListProps {
   hotels: Hotel[]
@@ -33,6 +33,13 @@ const getHotelsOnScroll = () => {
     hotelsChunk.value.push(...moreData)
   }
 }
+
+watch(
+  () => props.hotels,
+  () => {
+    hotelsChunk.value = [...props.hotels.slice(0, CHUNK_SIZE)]
+  }
+)
 
 useEventListener(window, 'scroll', getHotelsOnScroll)
 </script>
