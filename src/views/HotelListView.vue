@@ -20,9 +20,7 @@ const { hotels } = storeToRefs(hotelStore)
 
 const queryString = ref('')
 const filteredHotels = computed(() =>
-  hotels.value.filter(
-    (hotel) => hotel.name.toLowerCase().indexOf(queryString.value.toLowerCase()) === 0
-  )
+  hotels.value.filter((hotel) => hotel.name.toLowerCase().includes(queryString.value.toLowerCase()))
 )
 
 const setFilter = (filter: string) => {
