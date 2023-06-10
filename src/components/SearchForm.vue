@@ -14,6 +14,7 @@
           <el-autocomplete
             v-model="searchForm.destination"
             :fetch-suggestions="querySearch"
+            class="destination"
             clearable
           />
         </el-form-item>
@@ -197,6 +198,12 @@ onMounted(() => {
 
 .el-input-number {
   width: 100%;
+}
+
+:deep(.el-autocomplete) {
+  width: 100%;
+  /* TODO: find out why there is gap between label and autocomplete input. Remove margin */
+  margin-top: -1.5px;
 }
 
 :deep(.date-picker) {
