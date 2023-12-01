@@ -83,7 +83,7 @@ export const destinationsMock: Destination[] = [
   }
 ]
 
-const hotelsMock: Hotel[] = [
+export const hotelsMock: Hotel[] = [
   {
     id: 5018105,
     name: 'Woogo Central Park - Tempo Apartments',

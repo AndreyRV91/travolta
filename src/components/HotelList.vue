@@ -1,18 +1,18 @@
 <template>
-  <ul ref="scrollComponent">
+  <ul ref="scrollComponent" data-test-id="hotel-list">
     <li class="hotel-item" v-for="hotel of hotelsChunk" :key="hotel.id">
       <HotelItem :hotel="hotel" />
     </li>
   </ul>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import HotelItem from '@/components/HotelItem.vue'
 import type { Hotel } from '@/types'
 import { useEventListener } from '@vueuse/core'
 import { ref, watch } from 'vue'
 
-interface HotelListProps {
+export interface HotelListProps {
   hotels: Hotel[]
 }
 

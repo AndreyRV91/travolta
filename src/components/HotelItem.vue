@@ -1,5 +1,5 @@
 <template>
-  <el-card class="hotel-item">
+  <el-card class="hotel-item" data-test-id="hotel-item">
     <el-row :gutter="20" class="hotel-item__wrapper">
       <el-col :span="7">
         <el-image
@@ -22,7 +22,12 @@
         </div>
       </el-col>
       <el-col :span="2">
-        <el-button color="#ff00ff" class="hotel-item__btn" @click="showDetails">
+        <el-button
+          color="#ff00ff"
+          class="hotel-item__btn"
+          data-test-id="details-button"
+          @click="showDetails"
+        >
           Show details
         </el-button>
       </el-col>
@@ -34,7 +39,7 @@
 import type { Hotel } from '@/types'
 import { ref } from 'vue'
 
-interface HotelItemProps {
+export interface HotelItemProps {
   hotel: Hotel
 }
 

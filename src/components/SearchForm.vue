@@ -6,11 +6,16 @@
     :rules="rules"
     label-width="120px"
     status-icon
-    @keyup="handleSubmitWithKey"
+    @submit.prevent="submitForm(searchFormRef)"
   >
     <el-row :gutter="20" justify-content="space-evenly" align-items="center">
       <el-col :span="6">
-        <el-form-item label="Destination" prop="destination" required>
+        <el-form-item
+          label="Destination"
+          prop="destination"
+          required
+          data-testid="search-destination"
+        >
           <el-autocomplete
             v-model="searchForm.destination"
             :fetch-suggestions="querySearch"
@@ -21,22 +26,24 @@
       </el-col>
 
       <el-col :span="5">
-        <el-form-item label="Check-in" prop="checkin" required>
+        <el-form-item label="Check-in" prop="checkin" required data-testid="search-checkin">
           <el-date-picker
             v-model="searchForm.checkin"
             type="date"
             value-format="YYYY-MM-DD"
+            format="YYYY-MM-DD"
             class="date-picker"
             :disabled-date="disabledCheckIn"
           /> </el-form-item
       ></el-col>
 
       <el-col :span="5">
-        <el-form-item label="Check-out" prop="checkout" required>
+        <el-form-item label="Check-out" prop="checkout" required data-testid="search-checkout">
           <el-date-picker
             v-model="searchForm.checkout"
             type="date"
             value-format="YYYY-MM-DD"
+            format="YYYY-MM-DD"
             class="date-picker"
             :disabled-date="disabledCheckOut"
           /> </el-form-item
@@ -53,8 +60,8 @@
       ></el-col>
 
       <el-col :span="2" class="submit-btn">
-        <el-form-item>
-          <el-button color="#ff00ff" @click="submitForm(searchFormRef)"> Search </el-button>
+        <el-form-item data-testid="submit-button">
+          <el-button color="#ff00ff" native-type="submit"> Search </el-button>
         </el-form-item>
       </el-col>
     </el-row>
@@ -70,15 +77,15 @@ import { useRouter } from 'vue-router'
 import { destinationsMock } from '@/components/__mocks__'
 import { useHotelStore } from '@/store/hotels'
 
-const router = useRouter()
-const hotelStore = useHotelStore()
-const { setHotels } = hotelStore
-const { hotels } = storeToRefs(hotelStore)
-
 interface DestinationItem {
   id: number
   value: string
 }
+
+const router = useRouter()
+const hotelStore = useHotelStore()
+const { setHotels } = hotelStore
+const { hotels } = storeToRefs(hotelStore)
 
 const searchFormRef = ref<FormInstance>()
 const searchForm = reactive({
@@ -92,7 +99,7 @@ const searchForm = reactive({
 const noHotelsFound = ref(false)
 
 const disabledCheckIn = (time: any) => {
-  return time.getTime() < Date.now()
+  return time.getTime() <= new Date(Date.now() - 24 * 60 * 60 * 1000)
 }
 
 const disabledCheckOut = (time: any) => {
@@ -162,12 +169,6 @@ const sendFormData = async () => {
   router.push({
     name: 'hotels'
   })
-}
-
-const handleSubmitWithKey = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    submitForm(searchFormRef.value)
-  }
 }
 
 watch(searchForm, () => {

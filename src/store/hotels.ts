@@ -8,6 +8,7 @@ export const useHotelStore = defineStore('hotels', () => {
 
   const setHotels = async (payload: HotelsRequestBody) => {
     try {
+      console.log('setHotels', setHotels)
       hotels.value = await fetchHotels(payload)
     } catch (error) {
       console.error(error)
