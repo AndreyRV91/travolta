@@ -2,7 +2,7 @@
   <el-card>
     <div class="title">Filter Box</div>
     <div>Find by hotel name</div>
-    <el-input v-model="filter" />
+    <el-input v-model="filter" data-test-id="hotel-search-input" />
   </el-card>
 </template>
 

@@ -14,7 +14,7 @@
           label="Destination"
           prop="destination"
           required
-          data-testid="search-destination"
+          data-test-id="search-destination"
         >
           <el-autocomplete
             v-model="searchForm.destination"
@@ -26,7 +26,7 @@
       </el-col>
 
       <el-col :span="5">
-        <el-form-item label="Check-in" prop="checkin" required data-testid="search-checkin">
+        <el-form-item label="Check-in" prop="checkin" required data-test-id="search-checkin">
           <el-date-picker
             v-model="searchForm.checkin"
             type="date"
@@ -38,7 +38,7 @@
       ></el-col>
 
       <el-col :span="5">
-        <el-form-item label="Check-out" prop="checkout" required data-testid="search-checkout">
+        <el-form-item label="Check-out" prop="checkout" required data-test-id="search-checkout">
           <el-date-picker
             v-model="searchForm.checkout"
             type="date"
@@ -60,7 +60,7 @@
       ></el-col>
 
       <el-col :span="2" class="submit-btn">
-        <el-form-item data-testid="submit-button">
+        <el-form-item data-test-id="submit-button">
           <el-button color="#ff00ff" native-type="submit"> Search </el-button>
         </el-form-item>
       </el-col>
