@@ -8,11 +8,12 @@
     status-icon
     @submit.prevent="submitForm(searchFormRef)"
   >
-    <el-row :gutter="20" justify-content="space-evenly" align-items="center">
-      <el-col :span="6">
+    <el-row :gutter="10" justify="center" align-items="center">
+      <el-col :span="20" :lg="6" :xs="24">
         <el-form-item
           label="Destination"
           prop="destination"
+          size="large"
           required
           data-test-id="search-destination"
         >
@@ -25,8 +26,14 @@
         </el-form-item>
       </el-col>
 
-      <el-col :span="5">
-        <el-form-item label="Check-in" prop="checkin" required data-test-id="search-checkin">
+      <el-col :span="10" :lg="3" :xs="12">
+        <el-form-item
+          label="Check-in"
+          prop="checkin"
+          required
+          size="large"
+          data-test-id="search-checkin"
+        >
           <el-date-picker
             v-model="searchForm.checkin"
             type="date"
@@ -37,8 +44,14 @@
           /> </el-form-item
       ></el-col>
 
-      <el-col :span="5">
-        <el-form-item label="Check-out" prop="checkout" required data-test-id="search-checkout">
+      <el-col :span="10" :lg="3" :xs="12">
+        <el-form-item
+          label="Check-out"
+          prop="checkout"
+          required
+          size="large"
+          data-test-id="search-checkout"
+        >
           <el-date-picker
             v-model="searchForm.checkout"
             type="date"
@@ -49,19 +62,19 @@
           /> </el-form-item
       ></el-col>
 
-      <el-col :span="3">
-        <el-form-item label="Adults" prop="adults">
+      <el-col :span="8" :lg="3" :xs="9">
+        <el-form-item label="Adults" prop="adults" size="large">
           <el-input-number v-model="searchForm.adults" :min="1" /> </el-form-item
       ></el-col>
 
-      <el-col :span="3">
-        <el-form-item label="Children" prop="children">
+      <el-col :span="8" :lg="3" :xs="9">
+        <el-form-item label="Children" prop="children" size="large">
           <el-input-number v-model="searchForm.children" :min="0" /> </el-form-item
       ></el-col>
 
-      <el-col :span="2" class="submit-btn">
-        <el-form-item data-test-id="submit-button">
-          <el-button color="#ff00ff" native-type="submit"> Search </el-button>
+      <el-col :span="4" :lg="3" :xs="6" class="submit-btn">
+        <el-form-item data-test-id="submit-button" size="large">
+          <el-button color="#bd00bd" native-type="submit"> Search </el-button>
         </el-form-item>
       </el-col>
     </el-row>
@@ -195,6 +208,11 @@ onMounted(() => {
 <style scoped>
 .submit-btn {
   align-self: end;
+}
+
+.el-button {
+  font-size: 18px;
+  width: 100%;
 }
 
 .el-input-number {

@@ -2,11 +2,10 @@
   <div>
     <SearchForm class="search-form" />
     <h1>Travel With <span class="text-pink">TRAVOLTA</span></h1>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex nemo iusto distinctio debitis sint
-    accusantium culpa modi praesentium odit hic alias libero nulla ut eaque cupiditate, provident
-    officiis, tenetur ducimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo minima
-    dolores nobis ducimus odio doloribus magni tenetur soluta! Repellat ad error quo architecto
-    alias quis laudantium, eaque dolorum neque enim.
+    TRAVOLTA's superpower lies in its ability to find the best deals on flights, accommodations, and
+    activities, ensuring that you get the most value for your money. Need a flight that won't cost
+    an arm and a leg? TRAVOLTA has got you covered. Seeking cozy accommodations that won't drain
+    your savings? TRAVOLTA will make it happen.
   </div>
 </template>
 
@@ -16,7 +15,7 @@ import SearchForm from '../components/SearchForm.vue'
 
 <style>
 .text-pink {
-  color: var(--raspberry_pink_light);
+  color: var(--color-primary);
   font-weight: inherit;
 }
 

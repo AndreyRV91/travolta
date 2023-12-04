@@ -13,7 +13,7 @@
           <vue3-star-ratings
             v-model="stars"
             disable-click
-            star-color="#ff00ff"
+            star-color="#bd00bd"
             inactive-color="#545c64"
             :star-size="18"
             :show-control="false"
@@ -23,7 +23,7 @@
       </el-col>
       <el-col :span="2">
         <el-button
-          color="#ff00ff"
+          color="#bd00bd"
           class="hotel-item__btn"
           data-test-id="details-button"
           @click="showDetails"

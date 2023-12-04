@@ -1,10 +1,17 @@
 :root {
-  --raspberry_pink_light: #ff00ff;
-  --gray: #F2F3F5;
+  --color-primary: #bd00bd;
+  --color-secondary: #0c2672;
+  --color-primary-variant: #bd00bd;
+  --color-secondary-variant: #664afa;
+  --color-gray: #f8f9fc;
+  --color-white: #fff;
   --gray_dark: #434a50;
   --gray_light: #686c6e;
 }
+/*from huemint 
 
+
+ */
 *,
 *::before,
 *::after {
@@ -26,4 +33,9 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
 }
